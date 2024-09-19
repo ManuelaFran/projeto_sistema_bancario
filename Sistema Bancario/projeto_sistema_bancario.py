@@ -31,3 +31,21 @@ while True:
                   realizado com sucesso.""")
         else:
             print("Valor de depósito inválido. Insira um valor positivo.")
+
+    elif opcao == '2':  # Saque
+        if saques_diarios_realizados >= limite_saque_diario:
+            print("Você já realizou o limite máximo de saques diários.")
+        else:
+            valor_saque = float(input("Digite o valor do saque: R$ "))
+            if valor_saque > saldo:
+                print("Saldo insuficiente para realizar o saque.")
+            elif valor_saque > saque_maximo:
+                print(f"""Valor do saque excede o limite de R$
+                      {saque_maximo:.2f} por saque.""")
+            elif valor_saque > 0:
+                saldo -= valor_saque
+                saques.append(valor_saque)
+                saques_diarios_realizados += 1
+                print(f"Saque de R$ {valor_saque:.2f} realizado com sucesso.")
+            else:
+                print("Valor de saque inválido. Insira um valor positivo.")
