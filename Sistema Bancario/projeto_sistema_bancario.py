@@ -49,3 +49,23 @@ while True:
                 print(f"Saque de R$ {valor_saque:.2f} realizado com sucesso.")
             else:
                 print("Valor de saque inválido. Insira um valor positivo.")
+
+    elif opcao == '3':  # Extrato
+        print("\n--- Extrato da Conta ---")
+        if len(depositos) == 0 and len(saques) == 0:
+            print("Nenhuma transação realizada.")
+        else:
+            print("Depósitos:")
+            for deposito in depositos:
+                print(f"R$ {deposito:.2f}")
+            print("\nSaques:")
+            for saque in saques:
+                print(f"R$ {saque:.2f}")
+
+        print(f"\nSaldo atual: R$ {saldo:.2f}")
+        print("------------------------\n")
+    elif opcao == '4':  # Sair
+        print("Encerrando sistema bancário...")
+        break
+    else:
+        print("Opção inválida. Tente novamente.")
