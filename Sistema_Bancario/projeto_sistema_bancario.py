@@ -91,10 +91,38 @@ def menu():
         print("6. Sair")
         opcao = input("Escolha uma opção: ")
 
-        if opcao == '1':  # Criar usuário
+        if opcao == '1':
             nome = input("Nome: ")
             data_nascimento = input("Data de Nascimento (dd/mm/aaaa): ")
             cpf = input("CPF (apenas números): ")
             endereco = input("""Endereço (logradouro, número - bairro - cidade/
                              sigla do estado): """)
             criar_usuario(nome, data_nascimento, cpf, endereco)
+
+        elif opcao == '2':
+            cpf = input("Informe o CPF do usuário: ")
+            criar_conta_corrente(cpf)
+
+        elif opcao == '3':
+            valor = float(input("Digite o valor do depósito: R$ "))
+            saldo, extrato = deposito(saldo, valor, extrato)
+
+        elif opcao == '4':
+            valor = float(input("Digite o valor do saque: R$ "))
+            saldo, extrato = saque(saldo=saldo, valor=valor, extrato=extrato,
+                                   limite=limite_saque,
+                                   numero_saques=numero_saques,
+                                   limite_saques=limite_saques)
+
+        elif opcao == '5':
+            exibir_extrato(saldo, extrato=extrato)
+
+        elif opcao == '6':
+            print("Encerrando sistema bancário...")
+            break
+
+        else:
+            print("Opção inválida. Tente novamente.")
+
+
+menu()
