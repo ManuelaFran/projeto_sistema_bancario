@@ -1,3 +1,7 @@
+usuarios = []
+contas = []
+numero_conta_sequencial = 1
+
 saldo = 0.0
 depositos = []
 saques = []
