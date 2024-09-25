@@ -38,6 +38,21 @@ def criar_conta_corrente(cpf_usuario):
     print("Erro: Usuário não encontrado. Verifique o CPF.")
 
 
+def saque(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
+    if valor > saldo:
+        print("Saldo insuficiente para realizar o saque.")
+    elif valor > limite:
+        print(f"Valor do saque excede o limite de R$ {limite:.2f} por saque.")
+    elif numero_saques >= limite_saques:
+        print("Limite de saques diários atingido.")
+    else:
+        saldo -= valor
+        extrato.append(f"Saque: R$ {valor:.2f}")
+        numero_saques += 1
+        print(f"Saque de R$ {valor:.2f} realizado com sucesso.")
+    return saldo, extrato
+
+
 saldo = 0.0
 depositos = []
 saques = []
