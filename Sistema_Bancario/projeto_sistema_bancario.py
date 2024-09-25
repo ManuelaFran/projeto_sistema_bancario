@@ -53,6 +53,16 @@ def saque(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
     return saldo, extrato
 
 
+def deposito(saldo, valor, extrato, /):
+    if valor > 0:
+        saldo += valor
+        extrato.append(f"Depósito: R$ {valor:.2f}")
+        print(f"Depósito de R$ {valor:.2f} realizado com sucesso.")
+    else:
+        print("Valor de depósito inválido.")
+    return saldo, extrato
+
+
 saldo = 0.0
 depositos = []
 saques = []
