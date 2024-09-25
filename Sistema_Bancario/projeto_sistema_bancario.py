@@ -19,6 +19,25 @@ def criar_usuario(nome, data_nascimento, cpf, endereco):
     print(f"Usuário {nome} cadastrado com sucesso.")
 
 
+def criar_conta_corrente(cpf_usuario):
+    global numero_conta_sequencial
+    cpf_usuario = cpf_usuario.replace(".", "").replace("-", "")
+
+    for usuario in usuarios:
+        if usuario["cpf"] == cpf_usuario:
+
+            contas.append({
+                "agencia": "0001",
+                "numero_conta": numero_conta_sequencial,
+                "usuario": usuario
+            })
+            print(f"""Conta {numero_conta_sequencial} criada para o usuário
+                  {usuario['nome']}.""")
+            numero_conta_sequencial += 1
+            return
+    print("Erro: Usuário não encontrado. Verifique o CPF.")
+
+
 saldo = 0.0
 depositos = []
 saques = []
