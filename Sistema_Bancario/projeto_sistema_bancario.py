@@ -74,18 +74,19 @@ def exibir_extrato(saldo, /, *, extrato):
     print("------------------------\n")
 
 
-"""saldo = 0.0
-depositos = []
-saques = []
-limite_saque_diario = 3
-saque_maximo = 500.0
-saques_diarios_realizados = 0
+def menu():
+    saldo = 0.0
+    extrato = []
+    limite_saques = 3
+    numero_saques = 0
+    limite_saque = 500.0
 
-while True:
-    print("----- Sistema Bancário -----")
-    print("1. Depositar")
-    print("2. Sacar")
-    print("3. Extrato")
-    print("4. Sair")
-    opcao = input("Escolha uma opção: ")
-"""
+    while True:
+        print("----- Sistema Bancário -----")
+        print("1. Criar Usuário")
+        print("2. Criar Conta Corrente")
+        print("3. Depositar")
+        print("4. Sacar")
+        print("5. Extrato")
+        print("6. Sair")
+        opcao = input("Escolha uma opção: ")
