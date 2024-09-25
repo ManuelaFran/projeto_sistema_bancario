@@ -90,3 +90,11 @@ def menu():
         print("5. Extrato")
         print("6. Sair")
         opcao = input("Escolha uma opção: ")
+
+        if opcao == '1':  # Criar usuário
+            nome = input("Nome: ")
+            data_nascimento = input("Data de Nascimento (dd/mm/aaaa): ")
+            cpf = input("CPF (apenas números): ")
+            endereco = input("""Endereço (logradouro, número - bairro - cidade/
+                             sigla do estado): """)
+            criar_usuario(nome, data_nascimento, cpf, endereco)
