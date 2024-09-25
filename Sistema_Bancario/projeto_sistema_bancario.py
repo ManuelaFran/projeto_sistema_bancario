@@ -2,6 +2,23 @@ usuarios = []
 contas = []
 numero_conta_sequencial = 1
 
+
+def criar_usuario(nome, data_nascimento, cpf, endereco):
+    cpf = cpf.replace(".", "").replace("-", "")
+    for usuario in usuarios:
+        if usuario["cpf"] == cpf:
+            print("Erro: Usuário com este CPF já cadastrado.")
+            return
+
+    usuarios.append({
+        "nome": nome,
+        "data_nascimento": data_nascimento,
+        "cpf": cpf,
+        "endereco": endereco
+    })
+    print(f"Usuário {nome} cadastrado com sucesso.")
+
+
 saldo = 0.0
 depositos = []
 saques = []
