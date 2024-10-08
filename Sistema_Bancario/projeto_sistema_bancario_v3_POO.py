@@ -75,3 +75,22 @@ class Conta:
     @property
     def historico(self):
         return self._historico
+
+
+class ContaCorrente(Conta):
+    def __init__(self, cliente, numero):
+        super().__init__(cliente, numero)
+        self._limite = 500.0
+        self._limite_saques = 3
+
+    @property
+    def limite(self):
+        return self._limite
+
+    @property
+    def limite_saques(self):
+        return self._limite_saques
+
+    @limite_saques.setter
+    def limite_saques(self, valor):
+        self._limite_saques = valor
