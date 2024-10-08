@@ -38,3 +38,15 @@ class Saque(Transacao):
             conta._historico.adicionar_transacao(f"""Saque: R$ {
                 self._valor:.2f} - {datetime.now()}""")
             print(f"Saque de R$ {self._valor:.2f} realizado com sucesso.")
+
+
+class Historico:
+    def __init__(self):
+        self._transacoes = []
+
+    def adicionar_transacao(self, transacao):
+        self._transacoes.append(transacao)
+
+    @property
+    def transacoes(self):
+        return self._transacoes
