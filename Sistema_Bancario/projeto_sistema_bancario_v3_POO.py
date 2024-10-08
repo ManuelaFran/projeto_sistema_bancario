@@ -139,3 +139,95 @@ def exibir_extrato(conta):
             print(transacao)
     print(f"Saldo atual: R$ {conta.saldo:.2f}")
     print("-----------------\n")
+
+
+def menu():
+    clientes = []
+    numero_conta_sequencial = 1
+
+    while True:
+        print("----- Sistema Bancário -----")
+        print("1. Criar Cliente")
+        print("2. Criar Conta Corrente")
+        print("3. Depositar")
+        print("4. Sacar")
+        print("5. Extrato")
+        print("6. Sair")
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == '1':  # Criar cliente
+            nome = input("Nome: ")
+            data_nascimento = input("Data de Nascimento (dd/mm/aaaa): ")
+            cpf = input("CPF (apenas números): ")
+            endereco = input("""Endereço (logradouro, número - bairro - cidade/
+                             estado): """)
+            cliente = criar_cliente(nome, data_nascimento, cpf, endereco)
+            clientes.append(cliente)
+            print(f"Cliente {nome} criado com sucesso.")
+
+        elif opcao == '2':  # Criar conta corrente
+            cpf = input("Informe o CPF do cliente: ")
+            cliente = next((c for c in clientes if c.cpf == cpf), None)
+            if cliente:
+                conta = criar_conta_corrente(cliente, numero_conta_sequencial)
+                numero_conta_sequencial += 1
+                print(f"""Conta criada para o cliente {cliente.nome}. Número
+                      da conta: {conta.numero}.""")
+            else:
+                print("Cliente não encontrado.")
+
+        elif opcao == '3':  # Depositar
+            cpf = input("Informe o CPF do cliente: ")
+            cliente = next((c for c in clientes if c.cpf == cpf), None)
+            if cliente:
+                numero_conta = int(input("Informe o número da conta: "))
+                conta = next((conta for conta in cliente.contas if
+                              conta.numero == numero_conta), None)
+                if conta:
+                    valor = float(input("Informe o valor do depósito: R$ "))
+                    deposito = Deposito(valor)
+                    deposito.registrar(conta)
+                else:
+                    print("Conta não encontrada.")
+            else:
+                print("Cliente não encontrado.")
+
+        elif opcao == '4':  # Sacar
+            cpf = input("Informe o CPF do cliente: ")
+            cliente = next((c for c in clientes if c.cpf == cpf), None)
+            if cliente:
+                numero_conta = int(input("Informe o número da conta: "))
+                conta = next((conta for conta in cliente.contas if
+                              conta.numero == numero_conta), None)
+                if conta:
+                    valor = float(input("Informe o valor do saque: R$ "))
+                    saque = Saque(valor)
+                    saque.registrar(conta)
+                else:
+                    print("Conta não encontrada.")
+            else:
+                print("Cliente não encontrado.")
+
+        elif opcao == '5':  # Exibir extrato
+            cpf = input("Informe o CPF do cliente: ")
+            cliente = next((c for c in clientes if c.cpf == cpf), None)
+            if cliente:
+                numero_conta = int(input("Informe o número da conta: "))
+                conta = next((conta for conta in cliente.contas if
+                              conta.numero == numero_conta), None)
+                if conta:
+                    exibir_extrato(conta)
+                else:
+                    print("Conta não encontrada.")
+            else:
+                print("Cliente não encontrado.")
+
+        elif opcao == '6':  # Sair
+            print("Encerrando o sistema bancário...")
+            break
+
+        else:
+            print("Opção inválida. Tente novamente.")
+
+
+menu()
