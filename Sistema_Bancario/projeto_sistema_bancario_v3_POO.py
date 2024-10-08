@@ -76,6 +76,22 @@ class Conta:
     def historico(self):
         return self._historico
 
+    @property
+    def agencia(self):
+        return self._agencia
+
+    def sacar(self, valor):
+        saque = Saque(valor)
+        saque.registrar(self)
+
+    def depositar(self, valor):
+        deposito = Deposito(valor)
+        deposito.registrar(self)
+
+    @staticmethod
+    def nova_conta(cliente, numero):
+        return ContaCorrente(cliente, numero)
+
 
 class ContaCorrente(Conta):
     def __init__(self, cliente, numero):
@@ -97,12 +113,31 @@ class ContaCorrente(Conta):
 
 
 class Cliente:
+    def __init__(self, endereco):
+        self._endereco = endereco
+        self._contas = []
+
+    def adicionar_conta(self, conta):
+        self._contas.append(conta)
+
+    @property
+    def endereco(self):
+        return self._endereco
+
+    @property
+    def contas(self):
+        return self._contas
+
+    def realizar_transacao(self, conta, transacao):
+        transacao.registrar(conta)
+
+
+class PessoaFisica(Cliente):
     def __init__(self, nome, data_nascimento, cpf, endereco):
+        super().__init__(endereco)
         self._nome = nome
         self._data_nascimento = data_nascimento
         self._cpf = cpf.replace(".", "").replace("-", "")
-        self._endereco = endereco
-        self._contas = []
 
     @property
     def nome(self):
@@ -113,20 +148,17 @@ class Cliente:
         return self._cpf
 
     @property
-    def contas(self):
-        return self._contas
-
-    def adicionar_conta(self, conta):
-        self._contas.append(conta)
+    def data_nascimento(self):
+        return self._data_nascimento
 
 
 def criar_cliente(nome, data_nascimento, cpf, endereco):
-    return Cliente(nome, data_nascimento, cpf, endereco)
+    return PessoaFisica(nome, data_nascimento, cpf, endereco)
 
 
 def criar_conta_corrente(cliente, numero_conta):
     conta = ContaCorrente(cliente, numero_conta)
-    Cliente.adicionar_conta(conta)
+    cliente.adicionar_conta(conta)
     return conta
 
 
@@ -185,8 +217,7 @@ def menu():
                               conta.numero == numero_conta), None)
                 if conta:
                     valor = float(input("Informe o valor do depósito: R$ "))
-                    deposito = Deposito(valor)
-                    deposito.registrar(conta)
+                    cliente.realizar_transacao(conta, Deposito(valor))
                 else:
                     print("Conta não encontrada.")
             else:
@@ -201,8 +232,7 @@ def menu():
                               conta.numero == numero_conta), None)
                 if conta:
                     valor = float(input("Informe o valor do saque: R$ "))
-                    saque = Saque(valor)
-                    saque.registrar(conta)
+                    cliente.realizar_transacao(conta, Saque(valor))
                 else:
                     print("Conta não encontrada.")
             else:
