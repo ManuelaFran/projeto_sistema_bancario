@@ -31,4 +31,4 @@ Para a segunda versão o sistema está otimizado para ser mais modular. As opera
 - Recebe o saldo por posição e o extrato por nome.
 
 ## Linguagens, Ferramentas e Bibliotecas Utilizadas
-- Python
+<img align='left' src="https://img.shields.io/badge/Python-000?style=for-the-badge&logo=python" style='max-width: 100%;'/>
