@@ -118,3 +118,13 @@ class Cliente:
 
     def adicionar_conta(self, conta):
         self._contas.append(conta)
+
+
+def criar_cliente(nome, data_nascimento, cpf, endereco):
+    return Cliente(nome, data_nascimento, cpf, endereco)
+
+
+def criar_conta_corrente(cliente, numero_conta):
+    conta = ContaCorrente(cliente, numero_conta)
+    Cliente.adicionar_conta(conta)
+    return conta
