@@ -94,3 +94,27 @@ class ContaCorrente(Conta):
     @limite_saques.setter
     def limite_saques(self, valor):
         self._limite_saques = valor
+
+
+class Cliente:
+    def __init__(self, nome, data_nascimento, cpf, endereco):
+        self._nome = nome
+        self._data_nascimento = data_nascimento
+        self._cpf = cpf.replace(".", "").replace("-", "")
+        self._endereco = endereco
+        self._contas = []
+
+    @property
+    def nome(self):
+        return self._nome
+
+    @property
+    def cpf(self):
+        return self._cpf
+
+    @property
+    def contas(self):
+        return self._contas
+
+    def adicionar_conta(self, conta):
+        self._contas.append(conta)
