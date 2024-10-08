@@ -128,3 +128,14 @@ def criar_conta_corrente(cliente, numero_conta):
     conta = ContaCorrente(cliente, numero_conta)
     Cliente.adicionar_conta(conta)
     return conta
+
+
+def exibir_extrato(conta):
+    print("\n--- Extrato ---")
+    if len(conta.historico.transacoes) == 0:
+        print("Nenhuma transação realizada.")
+    else:
+        for transacao in conta.historico.transacoes:
+            print(transacao)
+    print(f"Saldo atual: R$ {conta.saldo:.2f}")
+    print("-----------------\n")
