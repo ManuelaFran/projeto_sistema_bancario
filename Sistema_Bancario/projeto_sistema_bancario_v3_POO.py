@@ -50,3 +50,28 @@ class Historico:
     @property
     def transacoes(self):
         return self._transacoes
+
+
+class Conta:
+    def __init__(self, cliente, numero):
+        self._saldo = 0.0
+        self._numero = numero
+        self._agencia = "0001"
+        self._cliente = cliente
+        self._historico = Historico()
+
+    @property
+    def saldo(self):
+        return self._saldo
+
+    @property
+    def numero(self):
+        return self._numero
+
+    @property
+    def cliente(self):
+        return self._cliente
+
+    @property
+    def historico(self):
+        return self._historico
